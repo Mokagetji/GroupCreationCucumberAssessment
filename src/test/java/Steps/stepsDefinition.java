@@ -44,17 +44,29 @@ public class stepsDefinition {
 
     }
     @And("i click login submit button")
-    public void i_click_login_submit_button() {
+    public void i_click_login_submit_button() throws InterruptedException {
         driver.findElement(By.id("login-submit")).click();
+        //driver.wait(5000);
 
     }
     @Then("i should be logged in successfully as admin")
-    public void i_should_be_logged_in_successfully_as_admin() {
+    public void i_should_be_logged_in_successfully_as_admin() throws InterruptedException {
         assert driver.findElement(By.id("app-main-content")).isDisplayed();
-
+        Thread.sleep(5000);
 
     }
-
-
-
+    @When("i click on the profile button")
+    public void i_click_on_the_profile_button() throws InterruptedException {
+                driver.findElement(By.xpath("//button[contains(@class,'user-pill')]")).click();
+                Thread.sleep(5000);
+    }
+    @And("i click admin panel")
+    public void i_click_admin_panel() throws InterruptedException {
+        driver.findElement(By.xpath("//button[.//span[contains(text(),'Admin')]]")).click();
+        Thread.sleep(5000);
+    }
+    @Then("i should be redirected to admin dashboard")
+    public void i_should_be_redirected_to_admin_dashboard() {
+       assert driver.findElement(By.xpath("//div[@class='admin-dashboard']")).isDisplayed();
+    }
 }

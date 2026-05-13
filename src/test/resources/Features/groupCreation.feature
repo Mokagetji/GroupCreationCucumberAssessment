@@ -11,6 +11,16 @@ Feature: groupCreation
     When i click on the profile button
     And i click admin panel
     Then i should be redirected to admin dashboard
+    When i click groups
+    And i click create new group button
+    And i enter the group name
+    And i enter the group description
+    And i enter the year
+    And i enter the max capacity
+    And i enter the start date
+    And i enter the end date
+    And i click create button
+    Then the group should be created
 
     Examples:
       |email  | password |

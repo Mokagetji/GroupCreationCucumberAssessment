@@ -1,4 +1,4 @@
-##Cucumber Group Creation and Validation Assessment
+#Cucumber Group Creation and Validation Assessment
 
 Instructions to follow:
 

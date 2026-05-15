@@ -2,8 +2,7 @@ package Steps;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 
 public class stepsDefinition {
@@ -68,5 +67,76 @@ public class stepsDefinition {
     @Then("i should be redirected to admin dashboard")
     public void i_should_be_redirected_to_admin_dashboard() {
        assert driver.findElement(By.xpath("//div[@class='admin-dashboard']")).isDisplayed();
+    }
+
+    @When("i click groups")
+    public void i_click_groups() throws InterruptedException {
+        driver.findElement(By.xpath("//nav//button[contains(.,'Groups')]")).click();
+        Thread.sleep(5000);
+
+    }
+    @And("i click create new group button")
+    public void i_click_create_new_group_button() {
+        driver.findElement(By.xpath("//button[contains(.,'Create New Group')]")).click();
+
+    }
+    @And("i enter the group name (.*)$")
+    public void i_enter_the_group_name(String groupName) {
+        driver.findElement(By.xpath("//input[@name='name']")).sendKeys(groupName);
+    }
+    @And("i enter the group description (.*)$")
+    public void i_enter_the_group_description(String groupDescription) {
+        driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys(groupDescription);
+    }
+
+    @And("i enter the year (.*)$")
+    public void i_enter_the_year(String year) {
+        driver.findElement(By.name("year")).clear();
+        driver.findElement(By.name("year")).sendKeys(year);
+    }
+    @And("i enter the max capacity (.*)$")
+    public void i_enter_the_max_capacity(String maxCapacity) {
+        driver.findElement(By.xpath("//input[@name='maxCapacity']")).sendKeys(maxCapacity);
+
+    }
+    @And("i enter the start date (.*)$")
+    public void i_enter_the_start_date(String startDate) {
+        String[] parts = startDate.split("/");
+
+        driver.findElement(By.name("startDate")).click();
+
+        driver.findElement(By.name("startDate"))
+                .sendKeys(
+                        parts[0],
+                        Keys.ARROW_RIGHT,
+                        parts[1],
+                        Keys.ARROW_RIGHT,
+                        parts[2]
+                );
+    }
+
+    @And("i enter the end date (.*)$")
+     public void i_enter_the_end_date(String endDate) {
+        String[] parts = endDate.split("/");
+
+        driver.findElement(By.name("endDate")).click();
+
+        driver.findElement(By.name("endDate"))
+                .sendKeys(
+                        parts[0],
+                        Keys.ARROW_RIGHT,
+                        parts[1],
+                        Keys.ARROW_RIGHT,
+                        parts[2]
+                );
+
+    }
+    @And("i click create button")
+    public void i_click_create_button() {
+        driver.findElement(By.xpath("//button[contains(.,'Create Group')]")).click();
+    }
+    @Then("the group should be created")
+    public void the_group_should_be_created() {
+        assert driver.findElement(By.xpath("//div[contains(text(),'Group created successfully!')]")).isDisplayed();
     }
 }
